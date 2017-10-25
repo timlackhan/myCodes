@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="../angular/angular.min.js"></script>
+</head>
+
+
+<script>
+var system = angular.module('mySystem', []);
+system.controller('mySystemCtrl',['$http','$location',
+                                  function($http,$location) {
+	/* this指代的是mSC */
+	var vm = this;
+	vm.alertVar=false;
+	
+	vm.regFun=function(url){
+		window.location=url;
+	}
+	
+	vm.alertFun=function(url){
+		var submitURL="http://localhost:8888/login/login?name="+vm.name+"&pwd="+vm.pwd;
+		$http({
+			method:'GET',
+			url:submitURL
+		}).success(function(data){
+			if(data==0){
+				vm.alertVar=true;
+			}else{
+				window.location=url;
+			}
+		});
+    }
+
+
+	
+}]);
+</script>
+
+
+
+<body>
+<div ng-app="mySystem" ng-controller="mySystemCtrl as mSC">
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div id="myAlert" class="alert alert-warning" ng-show="mSC.alertVar">
+	    				<a href="#" class="close" data-dismiss="alert">&times;</a>
+	   					 <strong>警告！</strong>您的用户名或密码有问题。
+				</div>
+				
+				<div class="jumbotron">
+					<h1>
+						学生选课系统
+					</h1>
+					<p>
+						欢迎来到SSSP版本的学生选课系统嘻嘻！
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-4 column">
+				<h2>
+					<strong>华师大研究生院</strong>
+				</h2>
+				<p>
+					点击此处查看关于华师大研究生院的信息
+				</p>
+				<p>
+					 <a class="btn" href="http://www.yjsy.ecnu.edu.cn/">更多细节 »</a>
+				</p>
+			</div>
+			<div class="col-md-4 column">
+				<div class="carousel slide" id="carousel-394169">
+					<ol class="carousel-indicators">
+						<li class="active" data-slide-to="0" data-target="#carousel-394169">
+						</li>
+						<li data-slide-to="1" data-target="#carousel-394169">
+						</li>
+						<li data-slide-to="2" data-target="#carousel-394169">
+						</li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active">
+							<img alt="" src="../pic/ecnu1.jpg" />
+							<div class="carousel-caption">
+								<h4>
+									华师大
+								</h4>
+								<p>
+									华师大出版社
+								</p>
+							</div>
+						</div>
+						<div class="item">
+							<img alt="" src="../pic/ecnu2.jpg" />
+							<div class="carousel-caption">
+								<h4>
+									华师大
+								</h4>
+								<p>
+									华师大地图
+								</p>
+							</div>
+						</div>
+						<div class="item">
+							<img alt="" src="../pic/ecnu3.jpg" />
+							<div class="carousel-caption">
+								<h4>
+									华师大
+								</h4>
+								<p>
+									华师大丽娃河							
+								</p>
+							</div>
+						</div>
+					</div> <a class="left carousel-control" href="#carousel-394169" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-394169" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				</div>
+			</div>
+			<div class="col-md-4 column">
+				<form role="form">
+					<div class="form-group">
+						 <label for="exampleInputName">Name</label><input type="text" class="form-control" id="exampleInputName" ng-model="mSC.name"/>
+					</div>
+					<div class="form-group">
+						 <label for="exampleInputPassword1">Password</label><input type="password" class="form-control" id="exampleInputPassword1" ng-model="mSC.pwd"/>
+					</div>
+					 <button type="submit" class="btn btn-default" ng-click="mSC.regFun('http://localhost:8888/html/register.html')" >注册</button>
+					 <button type="submit" class="btn btn-default" ng-click="mSC.alertFun('http://localhost:8888/html/welcome.html')" >登录</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../jquery/dist/jquery.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="../jquery/dist/jquery.min.js"></script>
+</head>
+<script type="text/javascript">
+
+
+
+	$(function(){
+			var url = "http://localhost:8888/login/getName";
+		    $(this).load(url,function(data){
+		    	name=data+",请选课";
+		    	$("#welcomeHTML").html(name);
+		    }); 
+		    
+		    
+		    
+		    
+		    var url2="http://localhost:8888/login/choose";
+		    $(this).load(url2,function(data){
+		    	var json=eval("("+data+")");
+		    	var msg="<form role='form' action='http://localhost:8888/login/unchoose' method='post'><table  class='table'> <tr><td>id</td><td>选课名称</td><td>选课</td></tr>";
+		    	for(var i=0;i<json.length;i++){
+		    		if(i%2!=0){
+			    		msg+="<tr><td>"+i+"</td><td>"+json[i]+"</td><td><input type='checkbox' name='courses' value="+json[i]+"></td></tr>";
+			    	}else{
+			    		msg+="<tr class='warning'><td>"+i+"</td><td>"+json[i]+"</td><td><input type='checkbox' name='courses' value="+json[i]+"></td></tr>";
+			    	}	
+		    	}
+		    	msg+="</table><button type='submit' class='btn btn-default' id='btn1'>选课</button></form>";
+		    	$("#main").html(msg);
+		    });    
+	})
+	
+	
+</script>
+
+
+
+<body>
+
+
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="jumbotron">
+				<h1 id="welcomeHTML"></h1>
+			</div>
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<div class="panel-group" id="panel-185565">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-185565" href="#panel-element-671674">学生首页</a>
+							</div>
+							<div id="panel-element-671674" class="panel-collapse collapse">
+								<div class="panel-body">
+									<a href="http://localhost:8888/html/welcome.html">首页</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-185565" href="#panel-element-23921">选课</a>
+							</div>
+							<div id="panel-element-23921" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<a href="http://localhost:8888/html/toChoose.html">同学你想选什么课程呢？</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-185565" href="#panel-element-239212">查看</a>
+							</div>
+							<div id="panel-element-239212" class="panel-collapse collapse">
+								<div class="panel-body">
+									<a href="http://localhost:8888/html/chooseCourse.html">查看您已选择的课程</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								 <a class="panel-title" data-toggle="collapse" data-parent="#panel-185565" href="#panel-element-66666">查看课程</a>
+							</div>
+							<div id="panel-element-66666" class="panel-collapse collapse">
+								<div class="panel-body">
+									<a href="http://localhost:8889/html/showCourses.html">所有课程详情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 column" style="width: 700px;height:400px;" id="main">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script >
+
+
+</script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

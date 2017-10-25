@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="../angular/angular.min.js"></script>
+</head>
+<body>
+
+
+<script>
+var register = angular.module('myReg', []);
+register.controller('myRegCtrl',['$http','$location',
+                                  function($http,$location) {
+	
+	var vm = this;
+	
+	vm.regFun=function(url){
+		var submitURL="http://localhost:8888/login/register?name="+vm.name+"&pwd="+vm.pwd;
+		$http({
+			method:'GET',
+			url:submitURL
+		}).success(function(data){
+			if(data==1){
+				alert("注册成功！");
+				window.location=url;
+			}
+		});
+	}
+	
+	
+	
+
+}]);
+</script>
+
+
+
+
+
+
+<div ng-app="myReg" ng-controller="myRegCtrl as mRC">
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="jumbotron">
+					<h1>
+						注册您的用户
+					</h1>
+					<p>
+						Here to register your own account
+					</p>
+				</div>
+				<div class="row clearfix">
+					
+					<div class="col-md-6 column">
+						<form role="form">
+							<div class="form-group">
+								 <label for="exampleInputName">Name</label><input type="text" class="form-control" id="exampleInputName"  ng-model="mRC.name"/>
+							</div>
+							<div class="form-group">
+								 <label for="exampleInputPassword1">Password</label><input type="password" class="form-control" id="exampleInputPassword1"  ng-model="mRC.pwd"/>
+							</div>
+							<button type="submit" class="btn btn-default" ng-click="mRC.regFun('http://localhost:8888/html/hello.html')" >注册</button>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="../jquery/dist/jquery.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
